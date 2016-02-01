@@ -1,0 +1,164 @@
+html {
+  height: 100%;
+  font-family: sans-serif; }
+
+body {
+  background-color: #59bc72;
+  margin: 0; }
+
+h3 {
+  font-size: 2.5rem;
+  color: white;
+  margin: 0;
+  font-weight: 300; }
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: white;
+  margin: 0; }
+
+p {
+  color: white;
+  font-weight: 200; }
+
+.container {
+  width: 80%;
+  max-width: 1170px;
+  margin: 0 auto; }
+  @media (max-width: 640px) {
+    .container {
+      width: 95%; } }
+
+.header {
+  position: relative;
+  padding: 10px 0 5px 0;
+  text-align: center;
+  background-color: #5c9865;
+  min-height: 60px;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 20px #497850; }
+
+.opentext {
+  text-align: center;
+  color: white; }
+  @media (max-width: 640px) {
+    .opentext h4 {
+      font-size: 1.2rem; } }
+
+.searchcont {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center; }
+
+.searchbar,
+.btn {
+  min-height: 40px;
+  border-radius: 10px;
+  border-style: none;
+  margin-top: 10px; }
+
+.searchbar {
+  min-width: 300px;
+  font-size: 1rem;
+  text-align: center;
+  margin: 10px 10px 0px 10px; }
+
+.btn {
+  min-width: 80px;
+  width: 150px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white; }
+
+.random {
+  background-color: #6dcff6;
+  box-shadow: inset 0 0 20px #9ddff9, 1px 1px 10px 0px #06455e;
+  border: #55c7f5 solid 1px;
+  order: -1; }
+
+.go {
+  background-color: #dce493;
+  box-shadow: inset 0 0 20px #f0f3d0, 1px 1px 10px 0px #596018;
+  border: #cfda6a solid 1px; }
+
+@media (max-width: 640px) {
+  .searchcont {
+    flex-wrap: wrap; }
+
+  .searchbar {
+    width: 100%; }
+
+  .random {
+    order: 0; }
+
+  .btn {
+    width: 45%;
+    margin: 10px 2.5% 0 2.5%; } }
+.results {
+  position: relative;
+  margin-top: 60px;
+  margin-bottom: 60px; }
+
+.resultbox {
+  position: relative;
+  min-height: 80px;
+  background-color: #5c9865;
+  margin-top: 1.5rem;
+  margin-left: 40px;
+  box-shadow: 5px 5px 30px #333;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between; }
+  @media (max-width: 640px) {
+    .resultbox {
+      flex-flow: column; }
+      .resultbox .resulttitle h4 {
+        font-size: 1.1rem; }
+      .resultbox .resulttxt {
+        padding-right: 10px; }
+        .resultbox .resulttxt p {
+          font-size: 0.9rem; }
+      .resultbox .resultgo {
+        min-height: 40px; } }
+
+.resultimg {
+  position: absolute;
+  min-width: 80px;
+  min-height: 80px;
+  background: url("../assets/yingying-a.jpg") center center no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  margin-left: -40px; }
+
+.resulttxt-wrap {
+  padding: 0 10px 0 50px;
+  cursor: pointer;
+  display: flex;
+  flex-flow: column; }
+
+.resulttitle {
+  display: flex;
+  height: 80px;
+  align-items: center; }
+
+.resultgo {
+  display: flex;
+  min-width: 80px;
+  background: #dce493;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 20px #f0f3d0;
+  cursor: pointer; }
+
+.resulttxt {
+  opacity: 1;
+  max-height: 1000px;
+  overflow: hidden;
+  transition: all 0.3s ease 0.1s; }
+
+.hide {
+  max-height: 0;
+  opacity: 0; }
+
+/*# sourceMappingURL=main.css.map */
