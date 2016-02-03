@@ -55,7 +55,7 @@ $(document).ready(function() {
       if (data.query.pages[i].thumbnail) {
         thumbnail = data.query.pages[i].thumbnail.source;
       } else {
-        thumbnail = "WikiSearch/assets/placeholder.jpeg";
+        thumbnail = "../Images/placeholder.jpeg";
       }
       descr = data.query.pages[i].extract;
       link = data.query.pages[i].fullurl;
