@@ -12,18 +12,37 @@ $(document).ready(function() {
 
   // perform random article and fetch link, thumbnail, first paragraph and title
 
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      document.getElementById("title").innerHTML = xhr.responseText;
-    }
-  };
-  xhr.open('GET', 'https://en.wikipedia.org/wiki/Marvik', true);
-  xhr.setRequestHeader("Api-User-Agent", "Example/1.0");
-  xhr.send();
 
-  console.log(xhr);
-  console.log(xhr.responseText);
+
+  function populate(data) {
+    //var title = data.
+    var links, titles, snippets = [];
+
+    for(var i = 0; i < data[0].length; i++){
+      titles[i] = data[1][i];
+      snippets[i] = data[2][i];
+      links[i] = data[3][i];
+      console.log(links);
+    }
+
+  }
+
+
+  var randomurl = "https://en.wikipedia.org/wiki/Special:Random";
+  $(".random").click(function() {
+    window.open(randomurl, '_blank');
+  });
+
+  var search = $("searchbar").text();
+  var searchurl = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=20&namespace=0&redirects=resolve&format=jsonfm&gplnamespace=0&gpllimit=20&search=" + search;
+  $(".btn.go").click(function() {
+    $.ajax({
+      type: 'GET',
+      url: searchurl,
+      crossDomain: true,
+      success: populate
+    });
+  });
 
   //var randomTitle = randomPage.getElementById('firstHeading').innerText();
 
