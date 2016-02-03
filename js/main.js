@@ -14,37 +14,67 @@ $(document).ready(function() {
 
 
 
-  function populate(data) {
-    //var title = data.
-    var links, titles, snippets = [];
+  // function populate(data) {
+  //   //var title = data.
+  //   var links, titles, snippets = [];
+  //   console.log(data);
+  //   for (var i = 0; i < data[0].length; i++) {
+  //     titles[i] = data[1][i];
+  //     snippets[i] = data[2][i];
+  //     links[i] = data[3][i];
+  //     console.log(links);
+  //   }
+  //
+  // }
 
-    for(var i = 0; i < data[0].length; i++){
-      titles[i] = data[1][i];
-      snippets[i] = data[2][i];
-      links[i] = data[3][i];
-      console.log(links);
-    }
-
-  }
-
-
+  // open random wiki page on button press
+  // todo: return list instead!
   var randomurl = "https://en.wikipedia.org/wiki/Special:Random";
   $(".random").click(function() {
     window.open(randomurl, '_blank');
   });
 
-  var search = $("searchbar").text();
-  var searchurl = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=20&namespace=0&redirects=resolve&format=jsonp&gplnamespace=0&gpllimit=20&search=" + search;
-  $(".btn.go").click(function() {
-    $.ajax({
-      type: 'GET',
-      url: searchurl,
-      // crossDomain: true,
-      dataType: "jsonp",
-      success: populate
 
+  var searchurl = "https://en.wikipedia.org/wiki/api.php";
+  // listen for input and perform search - remove go button
+  $(".searchbar").on("input", function(){
+    var search = $(".searchbar").val();
+    console.log(search);
+
+    $.ajax({
+      type: "GET",
+      url: searchurl,
+      dataType: "jsonp",
+      data: {
+        "action": "query",
+        "list": "search",
+        "search": search
+      }
     });
+
   });
+
+  function fire(){
+    console.log("fire");
+  }
+  // $(".btn.go").click(function() {
+  //   var search = $("searchbar").text();
+  //   var searchurl = "https://en.wikipedia.org/wiki/api.php";
+  //   $.ajax({
+  //     type: 'GET',
+  //     url: searchurl,
+  //     headers: {
+  //       "Api-User-Agent": "WikiSearchv0.1"
+  //     },
+  //     crossDomain: true,
+  //     dataType: "jsonp",
+  //
+  //     success: populate
+  //
+  //   });
+  // });
+
+
 
   //var randomTitle = randomPage.getElementById('firstHeading').innerText();
 
