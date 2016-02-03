@@ -34,13 +34,15 @@ $(document).ready(function() {
   });
 
   var search = $("searchbar").text();
-  var searchurl = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=20&namespace=0&redirects=resolve&format=jsonfm&gplnamespace=0&gpllimit=20&search=" + search;
+  var searchurl = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=20&namespace=0&redirects=resolve&format=jsonp&gplnamespace=0&gpllimit=20&search=" + search;
   $(".btn.go").click(function() {
     $.ajax({
       type: 'GET',
       url: searchurl,
-      crossDomain: true,
+      // crossDomain: true,
+      dataType: "jsonp",
       success: populate
+
     });
   });
 
