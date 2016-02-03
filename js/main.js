@@ -37,25 +37,45 @@ $(document).ready(function() {
 
   var searchurl = "https://en.wikipedia.org/wiki/api.php";
   // listen for input and perform search - remove go button
-  $(".searchbar").on("input", function(){
+  $(".searchbar").on("input", function() {
     var search = $(".searchbar").val();
     console.log(search);
 
     $.ajax({
-      type: "GET",
-      url: searchurl,
-      dataType: "jsonp",
+      url: 'http://en.wikipedia.org/w/api.php',
       data: {
-        "action": "query",
-        "list": "search",
-        "search": search
-      }
-    });
+        action: 'query',
+        format: 'json',
+        formatversion: "2",
+        // list: 'search',
+        // srsearch: search,
+        // srlimit: 20,
+        generator: "prefixsearch",
+        gpslimit: 20,
+        gpssearch: search,
+        prop: "pageimages|pageterms|info|extracts",
+        piprop: "thumbnail",
+        inprop: 'url',
+        pithumbsize: 150,
+        pilimit: 20,
+        exsentences: 2,
+        exintro: 1,
+        exlimit: 20,
+        explaintext: 1,
+        redirects: 1,
+        // exlimit: 20,
+        // pllimit: 20,
+      },
+      dataType: 'jsonp',
+      success: fire
 
+    });
   });
 
-  function fire(){
-    console.log("fire");
+
+  function fire(data) {
+    console.log(data);
+    
   }
   // $(".btn.go").click(function() {
   //   var search = $("searchbar").text();
