@@ -1,32 +1,5 @@
 $(document).ready(function() {
 
-  $(".resulttxt-wrap").click(function() {
-    var element = $(this).find(".resulttxt");
-
-    if (!element.hasClass("hide")) {
-      element.addClass("hide");
-    } else {
-      element.removeClass("hide");
-    }
-  });
-
-  // perform random article and fetch link, thumbnail, first paragraph and title
-
-
-
-  // function populate(data) {
-  //   //var title = data.
-  //   var links, titles, snippets = [];
-  //   console.log(data);
-  //   for (var i = 0; i < data[0].length; i++) {
-  //     titles[i] = data[1][i];
-  //     snippets[i] = data[2][i];
-  //     links[i] = data[3][i];
-  //     console.log(links);
-  //   }
-  //
-  // }
-
   // open random wiki page on button press
   // todo: return list instead!
   var randomurl = "https://en.wikipedia.org/wiki/Special:Random";
@@ -35,9 +8,11 @@ $(document).ready(function() {
   });
 
 
-  var searchurl = "https://en.wikipedia.org/wiki/api.php";
-  // listen for input and perform search - remove go button
-  $(".searchbar").on("input", function() {
+  // listen for input and perform search
+  $(".btn.go").on("click", function() {
+
+    $(".results").children().remove();
+
     var search = $(".searchbar").val();
     console.log(search);
 
@@ -47,9 +22,6 @@ $(document).ready(function() {
         action: 'query',
         format: 'json',
         formatversion: "2",
-        // list: 'search',
-        // srsearch: search,
-        // srlimit: 20,
         generator: "prefixsearch",
         gpslimit: 20,
         gpssearch: search,
@@ -58,7 +30,7 @@ $(document).ready(function() {
         inprop: 'url',
         pithumbsize: 150,
         pilimit: 20,
-        exsentences: 2,
+        exsentences: 5,
         exintro: 1,
         exlimit: 20,
         explaintext: 1,
@@ -74,8 +46,48 @@ $(document).ready(function() {
 
 
   function fire(data) {
+    var length, title, thumbnail, descr, link;
     console.log(data);
-    
+    length = data.query.pages.length;
+    console.log(length);
+    for (var i = 0; i < length; i++) {
+      title = data.query.pages[i].title;
+      if (data.query.pages[i].thumbnail) {
+        thumbnail = data.query.pages[i].thumbnail.source;
+      } else {
+        thumbnail = "../assets/placeholder.jpeg";
+      }
+      descr = data.query.pages[i].extract;
+      link = data.query.pages[i].fullurl;
+
+      var template =
+        `<div class="resultbox">
+      <div class="resultimg" style='background-image: url(${thumbnail})'></div>
+      <div class="resulttxt-wrap">
+        <div class="resulttitle">
+          <h4>${title}</h4></div>
+        <div class="resulttxt hide">
+          <p>${descr}</p>
+        </div>
+      </div>
+      <a href="${link}" class="resultgo"><img src="assets/arrow-go.png"></a>
+    </div>`
+
+
+      $(".results").append(template);
+
+    }
+
+    $(".resulttxt-wrap").click(function() {
+      var element = $(this).find(".resulttxt");
+
+      if (!element.hasClass("hide")) {
+        element.addClass("hide");
+      } else {
+        element.removeClass("hide");
+      }
+    });
+
   }
   // $(".btn.go").click(function() {
   //   var search = $("searchbar").text();
